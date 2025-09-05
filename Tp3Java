@@ -1,0 +1,85 @@
+import java.util.ArrayList;
+import java.util.List;
+
+// Clase base Persona
+class Persona {
+    private String nombre;
+    private int edad;
+
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    public String getNombre() { return nombre; }
+    public int getEdad() { return edad; }
+
+    @Override
+    public String toString() {
+        return "Persona{nombre='" + nombre + "', edad=" + edad + "}";
+    }
+}
+
+// Clase hija Estudiante
+class Estudiante extends Persona {
+    private String carrera;
+
+    public Estudiante(String nombre, int edad, String carrera) {
+        super(nombre, edad);
+        this.carrera = carrera;
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante{nombre='" + getNombre() + "', edad=" + getEdad() +
+                ", carrera='" + carrera + "'}";
+    }
+}
+
+// Clase Curso con composición
+class Curso {
+    private String nombre;
+    private String profesor;
+    private List<Estudiante> listaDeEstudiantes;
+
+    public Curso(String nombre, String profesor) {
+        this.nombre = nombre;
+        this.profesor = profesor;
+        this.listaDeEstudiantes = new ArrayList<>();
+    }
+
+    public void agregarEstudiante(Estudiante e) {
+        listaDeEstudiantes.add(e);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Curso: ").append(nombre).append("\n");
+        sb.append("Profesor: ").append(profesor).append("\n");
+        sb.append("Cantidad de alumnos: ").append(listaDeEstudiantes.size()).append("\n");
+        sb.append("Listado de estudiantes:\n");
+        for (Estudiante e : listaDeEstudiantes) {
+            sb.append("   - ").append(e).append("\n");
+        }
+        return sb.toString();
+    }
+}
+
+// Clase principal
+public class Main {
+    public static void main(String[] args) {
+        Curso curso1 = new Curso("Estructuras de Datos", "Prof. Carlos Ruiz");
+        curso1.agregarEstudiante(new Estudiante("Juan", 20, "Ingeniería en Sistemas"));
+        curso1.agregarEstudiante(new Estudiante("María", 22, "Diseño Gráfico"));
+        curso1.agregarEstudiante(new Estudiante("Pedro", 21, "Medicina"));
+
+        Curso curso2 = new Curso("Programación III", "Prof. Ana López");
+        curso2.agregarEstudiante(new Estudiante("Lucía", 19, "Ingeniería Industrial"));
+        curso2.agregarEstudiante(new Estudiante("Martín", 23, "Arquitectura"));
+
+        // Imprimir cursos
+        System.out.println(curso1);
+        System.out.println(curso2);
+    }
+}
