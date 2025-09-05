@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Producto {
+    private String codigo;
+    private String nombre;
+    private double precio;
+
+    public Producto(String codigo, String nombre, double precio) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+
+    public String getCodigo() { return codigo; }
+    public String getNombre() { return nombre; }
+    public double getPrecio() { return precio; }
+
+    @Override
+    public String toString() {
+        return "Producto{codigo='" + codigo + "', nombre='" + nombre + "', precio=" + precio + "}";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        
+        if (this == obj) return true;
+        
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        Producto producto = (Producto) obj;
+      
+        return codigo != null && codigo.equals(producto.codigo);
+    }
+
+    @Override
+    public int hashCode() {
+        
+        return codigo != null ? codigo.hashCode() : 0;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        List<Producto> lista = new ArrayList<>();
+
+        Producto p1 = new Producto("A1", "Manzana", 100.0);
+        Producto p2 = new Producto("B2", "Banana", 80.0);
+        Producto p3 = new Producto("A1", "Manzana Roja", 120.0); 
+
+       
+        if (!lista.contains(p1)) lista.add(p1);
+        if (!lista.contains(p2)) lista.add(p2);
+        if (!lista.contains(p3)) lista.add(p3); 
